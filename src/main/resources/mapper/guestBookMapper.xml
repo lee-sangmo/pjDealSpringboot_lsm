@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace는 반드시 mapper 위치로 설정해야 된다. -->
+<mapper namespace="com.ict.edu3.domain.guestbook.mapper.GuestBookMapper">
+	<select id="getGuestBookList" resultType="GuestBookVO">
+		select * from guestbook2 order by gb_idx asc
+	</select>
+
+	<select id="getGuestBookById" parameterType="String"  resultType="GuestBookVO" >
+		select * from guestbook2 where gb_idx = #{gb_idx}
+	</select>
+	
+	<delete id="getGuestBookDelete" parameterType="String">
+		delete from guestbook2 where gb_idx = #{gb_idx}
+	</delete>
+
+	<update id="getGuestBookUpdate" parameterType="GuestBookVO">
+		update guestbook2 
+		set gb_name = #{gb_name}, gb_subject = #{gb_subject}, gb_content = #{gb_content}, gb_email = #{gb_email} 
+		where gb_idx = #{gb_idx}
+	</update>
+
+	<insert id="getGuestBookWrite" parameterType="GuestBookVO">
+		insert into guestbook2 (gb_name, gb_subject, gb_content, gb_email, gb_pw, gb_regdate, gb_id, gb_filename) 
+		values (#{gb_name}, #{gb_subject}, #{gb_content}, #{gb_email}, #{gb_pw}, now(), #{gb_id}, #{gb_filename})
+	</insert>
+</mapper>
